@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Flood Prediction Result</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', Arial, Helvetica, sans-serif;
+
+        background: linear-gradient(160deg,
+          #1a0a3d 0%,
+          #2e1065 10%,
+          #3b1880 20%,
+          #2a2080 30%,
+          #1e2d8a 40%,
+          #162a7a 50%,
+          #2a1560 65%,
+          #1c1250 80%,
+          #120b35 100%);
+        background-attachment: fixed;
+        overflow-x: hidden;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .overlay {
+        width: 100%;
+        min-height: 100vh;
+        background: rgba(10, 5, 30, 0.30);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        /* Sit above rain canvas (z-index: 1) and particles (z-index: 6) */
+        position: relative;
+        z-index: 20;
+      }
+
+      .container {
+        width: 600px;
+        max-width: 90%;
+        background: rgba(10, 10, 22, 0.72);
+        backdrop-filter: blur(22px);
+        -webkit-backdrop-filter: blur(22px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 45px;
+        border-radius: 18px;
+        text-align: center;
+        box-shadow: 0 16px 60px rgba(0, 0, 0, 0.65),
+                    0 0 0 1px rgba(255, 255, 255, 0.06),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        color: white;
+        position: relative;
+        z-index: 21;
+      }
+
+      h1 {
+        color: #4caf50;
+        font-size: 48px;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 15px rgba(76, 175, 80, 0.3);
+      }
+
+      h2 {
+        font-size: 28px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 35px;
+      }
+
+      a {
+        display: inline-block;
+        background: linear-gradient(135deg, #0d6efd, #0a58ca);
+        color: white;
+        border: none;
+        padding: 15px 35px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(13, 110, 253, 0.35);
+      }
+
+      a:hover {
+        background: linear-gradient(135deg, #0a58ca, #084dbd);
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px rgba(13, 110, 253, 0.45);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Weather Animation Layers -->
+    <canvas id="rain-canvas"></canvas>
+    <div id="cloud-layer">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+    </div>
+    <div id="lightning-flash"></div>
+    <div id="particles-container"></div>
+    <div id="fog-layer"></div>
+    <div id="wave-layer">
+      <svg class="wave wave-back" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C120,65 240,15 360,40 C480,65 600,15 720,40 C840,65 960,15 1080,40 C1200,65 1320,15 1440,40 L1440,100 L0,100 Z"/>
+      </svg>
+      <svg class="wave wave-mid" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,55 C180,30 360,70 540,45 C720,20 900,65 1080,40 C1260,15 1380,55 1440,35 L1440,100 L0,100 Z"/>
+      </svg>
+      <svg class="wave wave-front" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,50 C160,70 320,25 480,50 C640,75 800,30 960,55 C1120,80 1280,35 1440,50 L1440,100 L0,100 Z"/>
+      </svg>
+    </div>
+
+    <div class="overlay">
+      <div class="container">
+        <h1 style="color: #4caf50">✅ No Flood Chance</h1>
+
+        <h2>Weather conditions indicate a low possibility of flooding.</h2>
+
+        <br /><br />
+
+        <a href="/">Predict Again</a>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

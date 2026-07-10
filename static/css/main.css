@@ -1,0 +1,350 @@
+/* ========================================
+   Rising Waters - Weather Animation Theme
+   Professional Flood Prediction Dashboard
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ===== PAGE FADE-IN ===== */
+@keyframes pageReveal {
+  from { opacity: 0; filter: blur(4px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+body {
+  font-family: 'Inter', Arial, Helvetica, sans-serif !important;
+  animation: pageReveal 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ===== ATMOSPHERIC DEPTH ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%,   rgba(167, 139, 250, 0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 80%  50% at 15% 30%,  rgba(56, 189, 248, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 70%  50% at 85% 25%,  rgba(139, 92, 246, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 90%  60% at 50% 60%,  rgba(14, 165, 233, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ===== RAIN CANVAS ===== */
+#rain-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ===== CLOUD LAYER ===== */
+#cloud-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 250px;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(35px);
+}
+
+.cloud-1 {
+  background: radial-gradient(ellipse, rgba(30, 40, 60, 0.85), transparent 70%);
+  top: -50px; left: -100px;
+  width: 600px; height: 180px;
+  animation: cloudDrift1 28s linear infinite;
+}
+
+.cloud-2 {
+  background: radial-gradient(ellipse, rgba(20, 30, 50, 0.7), transparent 70%);
+  top: -25px; left: 30%;
+  width: 500px; height: 150px;
+  animation: cloudDrift2 35s linear infinite;
+  animation-delay: -12s;
+}
+
+.cloud-3 {
+  background: radial-gradient(ellipse, rgba(25, 35, 55, 0.6), transparent 70%);
+  top: -35px; left: 60%;
+  width: 550px; height: 160px;
+  animation: cloudDrift3 40s linear infinite;
+  animation-delay: -6s;
+}
+
+@keyframes cloudDrift1 {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(calc(100vw + 200px)); }
+}
+@keyframes cloudDrift2 {
+  0% { transform: translateX(100vw); }
+  100% { transform: translateX(-600px); }
+}
+@keyframes cloudDrift3 {
+  0% { transform: translateX(-250px); }
+  100% { transform: translateX(calc(100vw + 250px)); }
+}
+
+/* ===== LIGHTNING FLASH ===== */
+#lightning-flash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 0%, rgba(180,200,255,0.5), rgba(100,150,255,0.15) 40%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.08s ease;
+}
+
+/* ===== FOG / MIST LAYER ===== */
+#fog-layer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%; height: 300px;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(to top,
+    rgba(150,170,190,0.12) 0%,
+    rgba(130,155,180,0.06) 40%,
+    transparent 100%
+  );
+}
+
+#fog-layer::before,
+#fog-layer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#fog-layer::before {
+  background: radial-gradient(ellipse at 25% 80%, rgba(160,180,200,0.1), transparent 50%),
+              radial-gradient(ellipse at 75% 70%, rgba(140,165,190,0.08), transparent 50%);
+  animation: mistDrift 20s ease-in-out infinite alternate;
+}
+
+#fog-layer::after {
+  background: radial-gradient(ellipse at 50% 85%, rgba(150,175,200,0.07), transparent 45%);
+  animation: mistDrift 15s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes mistDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-20%); }
+}
+
+/* ===== WAVE LAYER ===== */
+#wave-layer {
+  position: fixed;
+  bottom: 0; left: 0;
+  width: 100%; height: 80px;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 200%;
+  height: 100%;
+  display: block;
+}
+
+.wave-back {
+  fill: rgba(0,60,120,0.25);
+  animation: waveScroll 10s linear infinite;
+}
+
+.wave-mid {
+  fill: rgba(0,80,140,0.2);
+  animation: waveScroll 7s linear infinite reverse;
+}
+
+.wave-front {
+  fill: rgba(0,100,160,0.15);
+  animation: waveScroll 5s linear infinite;
+}
+
+@keyframes waveScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== MOISTURE PARTICLES ===== */
+.moisture-particle {
+  position: fixed;
+  border-radius: 50%;
+  background: rgba(174,194,224,0.25);
+  pointer-events: none;
+  z-index: 6;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(40px); opacity: 0; }
+}
+
+/* ===== CONTENT Z-INDEX ===== */
+.overlay {
+  position: relative;
+  z-index: 100;
+  isolation: isolate;
+}
+
+.about,
+footer,
+nav,
+.main,
+.left,
+.form-box,
+.cards,
+.card {
+  position: relative;
+  z-index: 101;
+}
+
+/* ===== GLASSMORPHISM ENHANCEMENTS ===== */
+.form-box {
+  background: rgba(10, 10, 22, 0.72) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1) !important;
+}
+
+.about {
+  background: rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25) !important;
+}
+
+.about h2 {
+  color: #4fc3f7 !important;
+}
+
+.about p {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.card {
+  background: rgba(255,255,255,0.06) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px rgba(0,150,255,0.15) !important;
+}
+
+.card h3 {
+  color: #4fc3f7 !important;
+}
+
+.card p {
+  color: rgba(255,255,255,0.8) !important;
+}
+
+/* ===== BUTTON ENHANCEMENT ===== */
+button[type="submit"] {
+  background: linear-gradient(135deg, #0d6efd, #0a58ca) !important;
+  box-shadow: 0 4px 15px rgba(13,110,253,0.35) !important;
+  letter-spacing: 0.5px;
+}
+
+button[type="submit"]:hover {
+  background: linear-gradient(135deg, #0a58ca, #084dbd) !important;
+  box-shadow: 0 6px 25px rgba(13,110,253,0.45) !important;
+}
+
+/* ===== INPUT ENHANCEMENT ===== */
+input {
+  background: rgba(15, 15, 25, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+input:focus {
+  background: rgba(15, 15, 25, 0.6) !important;
+  border: 1px solid rgba(0, 217, 255, 0.6) !important;
+  box-shadow: 0 0 15px rgba(0, 217, 255, 0.35) !important;
+}
+
+/* ===== LOGO ENHANCEMENT ===== */
+.logo {
+  text-shadow: 0 2px 10px rgba(0,150,255,0.3);
+}
+
+.subtitle {
+  color: #4fc3f7 !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 13px !important;
+}
+
+/* ===== FOOTER ===== */
+footer p {
+  opacity: 0.6;
+  font-size: 14px;
+}
+
+/* ===== RESULT PAGE GLASSMORPHISM ===== */
+.result-container {
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35) !important;
+  color: white;
+}
+
+.result-container h1 {
+  text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+}
+
+.result-container h2 {
+  color: rgba(255,255,255,0.9) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  #cloud-layer { height: 150px; }
+  .cloud { filter: blur(25px); }
+  .cloud-1 { width: 350px; height: 120px; }
+  .cloud-2 { width: 300px; height: 100px; }
+  .cloud-3 { width: 320px; height: 110px; }
+  #wave-layer { height: 50px; }
+  #fog-layer { height: 180px; }
+}
+
+@media (max-width: 480px) {
+  #cloud-layer { height: 100px; }
+  .cloud-1 { width: 250px; height: 80px; }
+  .cloud-2 { width: 200px; height: 70px; }
+  .cloud-3 { display: none; }
+  #wave-layer { height: 35px; }
+  #fog-layer { height: 120px; }
+}

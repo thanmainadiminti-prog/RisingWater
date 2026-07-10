@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Flood Prediction System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background: linear-gradient(160deg,
+          #1a0a3d 0%,
+          #2e1065 10%,
+          #3b1880 20%,
+          #2a2080 30%,
+          #1e2d8a 40%,
+          #162a7a 50%,
+          #2a1560 65%,
+          #1c1250 80%,
+          #120b35 100%);
+        background-attachment: fixed;
+        overflow-x: hidden;
+        min-height: 100vh;
+      }
+
+      .overlay {
+        background: rgba(10, 5, 30, 0.30);
+        min-height: 100vh;
+        padding: 40px;
+        position: relative;
+        z-index: 100;
+        isolation: isolate;
+      }
+
+      .container {
+        width: 95%;
+
+        max-width: 1200px;
+
+        margin: auto;
+      }
+
+      nav {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        padding: 20px;
+
+        color: white;
+      }
+
+      .logo {
+        font-size: 45px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+        font-weight: 600;
+        opacity: 0.9;
+      }
+
+      .main {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-top: 40px;
+
+        flex-wrap: wrap;
+
+        gap: 30px;
+      }
+
+      .left {
+        width: 48%;
+
+        color: white;
+      }
+
+      .left h1 {
+        font-size: 35px;
+        line-height: 1.2;
+        margin-bottom: 18px;
+        font-weight: 700;
+      }
+
+      .left p {
+        font-size: 18px;
+
+        line-height: 1.8;
+      }
+
+      .form-box {
+        width: 700px;
+        max-width: 100%;
+        background: rgba(18, 18, 18, 0.68);
+        backdrop-filter: blur(15px);
+        padding: 28px;
+        border-radius: 20px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+      }
+
+      .form-box h2 {
+        text-align: center;
+
+        margin-bottom: 25px;
+
+        color: white;
+      }
+
+      .grid {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 12px;
+      }
+
+      input {
+        width: 100%;
+        height: 52px;
+        padding: 14px 16px;
+        border: none;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.22);
+        color: white;
+        font-size: 16px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input::placeholder {
+        color: #e2e2e2;
+        font-size: 15px;
+      }
+
+      input:focus {
+        border: 2px solid #00d9ff;
+        box-shadow: 0 0 12px rgba(0, 217, 255, 0.4);
+      }
+
+      button {
+        margin-top: 20px;
+
+        width: 100%;
+
+        padding: 14px;
+
+        background: #0d6efd;
+
+        color: white;
+
+        font-size: 18px;
+
+        font-weight: 600;
+
+        border: none;
+
+        border-radius: 8px;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #084dbd;
+
+        transform: scale(1.02);
+      }
+
+      .about {
+        margin-top: 50px;
+        background: rgba(225, 206, 206, 0.678);
+        padding: 30px;
+        border-radius: 20px;
+        position: relative;
+        z-index: 101;
+      }
+
+      .about h2 {
+        text-align: center;
+
+        margin-bottom: 20px;
+
+        color: #0d6efd;
+      }
+
+      .about p {
+        text-align: center;
+
+        font-size: 17px;
+
+        line-height: 1.8;
+
+        color: black;
+      }
+
+      .cards {
+        display: flex;
+
+        gap: 20px;
+
+        margin-top: 40px;
+
+        flex-wrap: wrap;
+      }
+
+      .card {
+        flex: 1;
+        min-width: 250px;
+        background: rgba(236, 232, 232, 0.678);
+        padding: 18px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+        position: relative;
+        z-index: 101;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card h3 {
+        margin-bottom: 8px;
+
+        font-size: 24px;
+
+        color: #0d6efd;
+      }
+
+      .card p {
+        text-align: left;
+
+        font-size: 15px;
+      }
+
+      footer {
+        margin-top: 60px;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        position: relative;
+        z-index: 101;
+      }
+      label {
+        display: block;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px 24px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Weather Animation Layers -->
+    <canvas id="rain-canvas"></canvas>
+    <div id="cloud-layer">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+    </div>
+    <div id="lightning-flash"></div>
+    <div id="particles-container"></div>
+    <div id="fog-layer"></div>
+    <div id="wave-layer">
+      <svg class="wave wave-back" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C120,65 240,15 360,40 C480,65 600,15 720,40 C840,65 960,15 1080,40 C1200,65 1320,15 1440,40 L1440,100 L0,100 Z"/>
+      </svg>
+      <svg class="wave wave-mid" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,55 C180,30 360,70 540,45 C720,20 900,65 1080,40 C1260,15 1380,55 1440,35 L1440,100 L0,100 Z"/>
+      </svg>
+      <svg class="wave wave-front" viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,50 C160,70 320,25 480,50 C640,75 800,30 960,55 C1120,80 1280,35 1440,50 L1440,100 L0,100 Z"/>
+      </svg>
+    </div>
+
+    <div class="overlay">
+      <div class="container">
+        <nav>
+          <div>
+            <div class="logo">🌊 Rising Waters</div>
+
+            <div class="subtitle">Machine Learning Flood Prediction System</div>
+          </div>
+        </nav>
+
+        <div class="main">
+          <div class="left">
+            <h1>AI-Powered Flood Risk Assessment</h1>
+
+            <p>
+              Our intelligent flood prediction system leverages advanced Machine Learning algorithms to analyze rainfall, humidity, cloud cover, temperature, and seasonal weather patterns. By processing historical weather data, the platform provides fast and accurate flood risk assessments, empowering disaster management authorities and communities to make informed decisions, strengthen preparedness, and take timely preventive action before flood events occur.
+            </p>
+          </div>
+
+          <div class="form-box">
+            <h2>Flood Prediction</h2>
+
+            <form action="/predict" method="POST">
+              <div class="grid">
+                <div>
+                  <label>🌡 Temperature (°C)</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    name="Temp"
+                    placeholder="Example: 30"
+                    min="-10"
+                    max="60"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>💧 Humidity (%)</label>
+                  <input
+                    type="number"
+                    name="Humidity"
+                    placeholder="Example: 75"
+                    min="0"
+                    max="100"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>☁ Cloud Cover (%)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="Cloud Cover"
+                    placeholder="Example: 40"
+                    min="0"
+                    max="100"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>🌧 Annual Rainfall (mm)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="ANNUAL"
+                    placeholder="Example: 3200"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>🌦 Jan-Feb Rainfall (mm)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="Jan-Feb"
+                    placeholder="Example: 250"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>🌱 Mar-May Rainfall (mm)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="Mar-May"
+                    placeholder="Example: 650"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>☔ Jun-Sep Rainfall (mm)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="Jun-Sep"
+                    placeholder="Example: 3100"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>🍂 Oct-Dec Rainfall (mm)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="Oct-Dec"
+                    placeholder="Example: 250"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>📊 Average June Rainfall (mm)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="avgjune"
+                    placeholder="Example: 275"
+                    min="0"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label>🗺 Subdivision Rainfall (mm)</label>
+                  <input
+                    type="number"
+                    step="any"
+                    name="sub"
+                    placeholder="Example: 650"
+                    min="0"
+                    required
+                  />
+                </div>
+              </div>
+
+              <button type="submit">Predict Flood</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="about">
+          <h2>About the Project</h2>
+
+          <p>
+            Floods are among the most destructive natural disasters, often causing significant damage to lives, property, and the environment. Rising Waters is an intelligent Machine Learning-based flood prediction system developed to provide early flood risk assessment using historical weather data. By analyzing rainfall patterns, temperature, humidity, cloud cover, and seasonal rainfall, the system identifies potential flood conditions with high accuracy. The application delivers fast and reliable predictions through a simple web interface, helping disaster management authorities, government agencies, and local communities make informed decisions and take timely preventive measures before flood events occur.
+          </p>
+
+          <div class="cards">
+            <div class="card">
+              <h3>🌦 Weather Intelligence</h3>
+
+              <p>
+                The system continuously analyzes critical weather parameters, including rainfall, temperature, humidity, cloud cover, and seasonal rainfall patterns. These environmental indicators help identify conditions that may lead to flooding and improve the accuracy of flood risk assessment.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>🧠 Smart AI Prediction</h3>
+
+              <p>
+                Advanced Machine Learning algorithms including Decision Tree, Random Forest, K-Nearest Neighbors (KNN), and XGBoost analyze historical weather records to recognize hidden patterns and generate accurate flood predictions. The best-performing model is integrated into the application for reliable real-time forecasting.
+              </p>
+            </div>
+
+            <div class="card">
+              <h3>🚨 Instant Results</h3>
+
+              <p>
+                Users simply enter the required weather parameters into the prediction form and receive an instant flood risk prediction within seconds. The easy-to-use interface enables quick analysis and supports timely decision-making for disaster preparedness and emergency response.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <p>
+            Developed using <strong>Python</strong> | <strong>Flask</strong> | <strong>Scikit-learn</strong> | <strong>Decision Tree</strong> | <strong>Random Forest</strong> | <strong>KNN</strong> | <strong>XGBoost</strong>
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
