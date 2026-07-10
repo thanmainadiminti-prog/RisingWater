@@ -1,150 +1,250 @@
-# 🌊 Rising Waters — AI-Powered Flood Risk Assessment
+# 🌊 Rising Waters
+### 🚨 AI-Powered Flood Risk Assessment using Machine Learning
 
-## 📌 Project Overview
+<p align="center">
 
-**Rising Waters** is an intelligent Machine Learning-based flood prediction system developed using Python and Flask. The application provides early flood risk assessment by analyzing historical weather data — including rainfall patterns, temperature, humidity, cloud cover, and seasonal rainfall — to identify potential flood conditions with high accuracy.
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
+![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black?logo=flask)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?logo=scikitlearn)
+![XGBoost](https://img.shields.io/badge/XGBoost-AI-success)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
-The platform delivers fast and reliable predictions through an immersive, animated web interface, helping disaster management authorities, government agencies, and local communities make informed decisions and take timely preventive measures before flood events occur.
-
----
-
-## 🚀 Features
-
-- AI-powered flood risk prediction using multiple ML algorithms
-- Clean, responsive web interface built with Flask + Jinja2
-- Instant prediction results with clear visual feedback
-- Immersive weather-themed animated UI (rain, clouds, lightning, fog, waves)
-- Glassmorphism card design with proper z-index layering
-- Violet and sky-blue stormy background atmosphere
-- Animated rain canvas that stays behind all content layers
-- Fully responsive layout for desktop and mobile
+</p>
 
 ---
 
-## 🛠 Technologies Used
+## 🌍 About the Project
 
-| Category | Tools |
-|---|---|
+Floods are among the most destructive natural disasters, causing severe damage to lives, infrastructure, and the environment. **Rising Waters** is an intelligent Machine Learning-powered flood prediction system that provides early flood risk assessment using historical weather data.
+
+The application analyzes rainfall, temperature, humidity, cloud cover, and seasonal rainfall patterns to estimate flood risk with high accuracy. Built using **Python**, **Flask**, and multiple Machine Learning algorithms, the platform enables users to receive instant flood predictions through a clean and interactive web interface.
+
+> **Predict Early • Prepare Better • Save Lives**
+
+---
+
+# ✨ Key Features
+
+- 🤖 AI-powered flood prediction
+- 🌧️ Weather-based flood risk assessment
+- ⚡ Instant prediction results
+- 🎨 Interactive weather-themed interface
+- 🌩️ Animated rain, clouds, lightning and fog
+- 📊 Multiple Machine Learning models
+- 💻 Responsive desktop & mobile design
+- 🔥 Glassmorphism modern UI
+- ☁️ Deployable on Render / IBM Cloud
+
+---
+
+# 🛠 Technology Stack
+
+| Category | Technologies |
+|-----------|--------------|
 | Backend | Python, Flask |
-| Frontend | HTML5, CSS3, JavaScript (Vanilla) |
-| Machine Learning | Scikit-learn, NumPy, Pickle |
-| ML Algorithms | Decision Tree, Random Forest, K-Nearest Neighbors (KNN), XGBoost |
-| Data Scaling | StandardScaler |
-| UI Design | Glassmorphism, CSS Animations, Canvas API |
+| Frontend | HTML5, CSS3, JavaScript |
+| Machine Learning | Scikit-Learn, NumPy, Pandas |
+| Algorithms | Decision Tree, Random Forest, KNN, XGBoost |
+| Model Storage | Pickle (.save) |
+| Data Processing | StandardScaler |
+| Deployment | Render |
 
 ---
 
-## 📊 Input Parameters
+# 📊 Weather Parameters
 
-The system predicts floods using the following 10 weather parameters:
+The prediction model evaluates **10 important weather parameters**.
 
-| Parameter | Description |
-|---|---|
-| Temperature (°C) | Atmospheric temperature |
-| Humidity (%) | Relative humidity |
-| Cloud Cover (%) | Percentage of sky covered by clouds |
-| Annual Rainfall (mm) | Total yearly rainfall |
-| Jan–Feb Rainfall (mm) | Winter season rainfall |
-| Mar–May Rainfall (mm) | Pre-monsoon rainfall |
-| Jun–Sep Rainfall (mm) | Monsoon season rainfall |
-| Oct–Dec Rainfall (mm) | Post-monsoon rainfall |
-| Average June Rainfall (mm) | Mean June rainfall for the subdivision |
-| Subdivision Rainfall (mm) | Historical subdivision-level rainfall |
-
----
-
-## 🤖 Machine Learning Models
-
-The following algorithms were trained and evaluated on historical weather data:
-
-- **Decision Tree Classifier**
-- **Random Forest Classifier** *(primary deployed model)*
-- **K-Nearest Neighbors (KNN)**
-- **XGBoost Classifier**
-
-**Preprocessing:** StandardScaler  
-**Model Storage:** Pickle (`.save` format, stored in `/Model`)
+| 🌦 Parameter | Description |
+|-------------|-------------|
+| 🌡 Temperature | Atmospheric Temperature |
+| 💧 Humidity | Relative Humidity |
+| ☁ Cloud Cover | Cloud Coverage |
+| 🌧 Annual Rainfall | Total Annual Rainfall |
+| ❄ Jan-Feb Rainfall | Winter Rainfall |
+| 🌱 Mar-May Rainfall | Pre-Monsoon Rainfall |
+| 🌊 Jun-Sep Rainfall | Monsoon Rainfall |
+| 🍂 Oct-Dec Rainfall | Post-Monsoon Rainfall |
+| 📈 Average June Rainfall | Mean June Rainfall |
+| 🗺 Subdivision Rainfall | Regional Rainfall |
 
 ---
 
-## 📁 Project Structure
+# 🧠 Machine Learning Models
 
+The project compares multiple classification algorithms.
+
+✅ Decision Tree
+
+✅ Random Forest ⭐ *(Best Performing Model)*
+
+✅ K-Nearest Neighbors (KNN)
+
+✅ XGBoost
+
+### Preprocessing
+
+- Feature Scaling (StandardScaler)
+- Train/Test Split
+- Model Comparison
+- Performance Evaluation
+
+---
+
+# 🏗 System Workflow
+
+```text
+Weather Data
+      │
+      ▼
+Data Preprocessing
+      │
+      ▼
+Feature Scaling
+      │
+      ▼
+Train ML Models
+      │
+      ▼
+Model Comparison
+      │
+      ▼
+Best Model Selection
+      │
+      ▼
+Flask Web Application
+      │
+      ▼
+Flood Prediction
 ```
+
+---
+
+# 📁 Project Structure
+
+```text
 Rising_Waters/
 │
-├── Dataset/              # Training data
+├── Dataset/
 ├── Model/
-│   ├── floods.save       # Trained ML model (Pickle)
-│   └── transform.save    # Fitted StandardScaler (Pickle)
-├── Notebook/             # Jupyter notebooks for training
+│ ├── floods.save
+│ └── transform.save
+│
+├── Notebook/
+│
 ├── static/
-│   ├── css/
-│   │   └── main.css      # Weather theme, animations, glassmorphism
-│   └── js/
-│       └── main.js       # Rain canvas, lightning, particle engine
+│ ├── css/
+│ ├── js/
+│ └── images/
+│
 ├── templates/
-│   ├── home.html         # Main prediction dashboard
-│   ├── chance.html       # Flood detected result page
-│   └── no_chance.html    # No flood result page
-├── app.py                # Flask app and routing
-├── requirements.txt      # Python dependencies
+│ ├── home.html
+│ ├── chance.html
+│ └── no_chance.html
+│
+├── app.py
+├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🌐 Live Demo
+# 🚀 Live Demo
 
-**Website:** https://rising-waters-19hr.onrender.com
+🌐 **Website**
+
+https://rising-waters-19hr.onrender.com
 
 ---
 
-## ▶️ Run Locally
+# 💻 Run Locally
 
-1. **Install the required packages**
+### Clone Repository
+
+```bash
+git clone https://github.com/YOUR_USERNAME/Rising-Waters.git
+```
+
+### Open Project
+
+```bash
+cd Rising_Waters
+```
+
+### Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-2. **Run the application**
+### Run Flask
 
 ```bash
 python app.py
 ```
 
-3. **Open in your browser**
+### Open Browser
 
-```
+```text
 http://127.0.0.1:5000
 ```
 
-> **Note:** No virtual environment (`.venv`) is included in this repository. Install dependencies directly using `pip`.
+---
+
+# 📸 Application Pages
+
+### 🏠 Home Page
+
+- AI-powered prediction dashboard
+- Interactive weather form
+- Animated storm background
+
+### 📊 Prediction Result
+
+- ⚠ Flood Chance Detected
+- ✅ No Flood Chance
+
+- Instant prediction
+- User-friendly interface
 
 ---
 
-## 📷 Prediction Output
+# 🎨 UI Highlights
 
-The application displays one of two results based on the entered weather conditions:
+✨ Glassmorphism Design
 
-| Result | Meaning |
-|---|---|
-| ✅ No Flood Chance | Weather conditions indicate a low possibility of flooding |
-| ⚠️ Flood Chance Detected | Please stay alert and take necessary precautions |
+🌧 Animated Rain Effect
 
----
+🌩 Lightning Animation
 
-## 🎨 UI Highlights
+🌫 Fog & Cloud Effects
 
-- **Background:** Multi-stop violet-to-indigo-to-sky-blue gradient simulating a stormy sky
-- **Rain Animation:** 60FPS canvas-based rain with wind effect; stays behind all content via proper z-index layering
-- **Glassmorphism Cards:** `backdrop-filter: blur(22px)` with dark semi-transparent backgrounds for maximum readability
-- **Layer Order:** Background → Atmospheric Glow → Rain Canvas → Clouds/Fog/Waves → Dark Overlay → Content Cards
+🌊 Dynamic Weather Background
+
+📱 Fully Responsive Layout
+
+⚡ Smooth User Experience
 
 ---
 
-## 👨‍💻 Developed By
+# 📈 Future Enhancements
 
-**Thanmai Nadiminti **
-  
-Internship Project
+- 📡 Live Weather API Integration
+- 🛰 Satellite Weather Monitoring
+- 📍 GPS Location Detection
+- 📱 Android Mobile Application
+- 🔔 SMS & Email Flood Alerts
+- ☁ IBM Cloud Deployment
+- 🤖 Deep Learning Models
+
+---
+
+# 👨‍💻 Developed By
+
+### Thanmai Nadiminti
+
+Artificial Intelligence & Machine Learning Internship Project
+
+---
+
+## ⭐ If you like this project, don't forget to Star the Repository!
