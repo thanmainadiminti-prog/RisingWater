@@ -145,11 +145,6 @@ The application displays one of two results based on the entered weather conditi
 
 ## 👨‍💻 Developed By
 
-**Sudheer Chidugundu**  
-**Charan Neerukattu**  
-**Himasri Vemulapalli**  
-**Bhavya Sri Konduru**  
-**Jeeshitha Sai Vistamsetty**  
-
-B.Tech CSE — SRM University AP  
+**Thanmai Nadiminti **
+  
 Internship Project
